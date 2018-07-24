@@ -65,4 +65,16 @@ public class HelloController {
     		return ResponseEntity.status(HttpStatus.CREATED).build();
     	}
     }
+    
+    @RequestMapping(value = "/changeOrder/status", method = RequestMethod.PUT)
+    public ResponseEntity <String> orderStatus(@RequestBody Order status) throws SQLException{
+    	int result;   	
+    	result=DBOperation.changeOrderStatus(status);
+    	if(result==0){
+    		return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+    	}
+    	else{
+    		return ResponseEntity.status(HttpStatus.CREATED).build();
+    	}
+    }
 }

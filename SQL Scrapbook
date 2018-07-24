@@ -1,0 +1,16 @@
+insert into User(UserId,UserName)values(1,"Swaroop")
+
+
+delete from User where UserId=1
+
+select * from User
+
+select * from boot
+select * from OrderItem
+
+CREATE table OrderItem(OrderId INT primary key NOT NULL,OrderStatus TEXT NOT NULL)
+
+insert into OrderItem(OrderId,OrderStatus)values(1,"Confirmed")
+
+
+UPDATE OrderItem set OrderStatus = "Initiated" where OrderId=1

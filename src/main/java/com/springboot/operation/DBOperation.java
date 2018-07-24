@@ -61,7 +61,6 @@ public class DBOperation {
 		int result=0;
 		try{
 			String query=String.format("insert into Product(ProductId,ProductName,Price)values(%s,\"%s\",\"%s\")",product.getProductId(),product.getProductName(),product.getProductPrice());
-			System.out.println(query);
 			result=stmt.executeUpdate(query);
 		}
 		catch(SQLException e){
@@ -78,8 +77,24 @@ public class DBOperation {
 		Statement stmt = conn.createStatement();
 		int result=0;
 		try{
-			String query=String.format("insert into Order(OrderId,OrderStatus)values(%s,\"%s\")",order.getOrderId(),order.getOrderStatus());
-			System.out.println(query);
+			String query=String.format("insert into OrderItem(OrderId,OrderStatus)values(%s,\"%s\")",order.getOrderId(),order.getOrderStatus());
+			result=stmt.executeUpdate(query);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		finally{
+			conn.close();
+		}
+		return result;
+	}
+
+	public static int changeOrderStatus(Order status) throws SQLException {
+		Connection conn= ConnectionToDb.connect();
+		Statement stmt = conn.createStatement();
+		int result=0;
+		try{
+			String query=String.format("UPDATE OrderItem set OrderStatus = \"%s\" where OrderId=%s",status.getOrderStatus(),status.getOrderId());
 			result=stmt.executeUpdate(query);
 		}
 		catch(SQLException e){
